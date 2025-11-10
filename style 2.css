@@ -1,0 +1,69 @@
+ /* Carousel promociones */
+    .promo-carousel{
+        max-width:1200px;
+        margin:12px auto;
+        padding:0 20px;
+    }
+    .promo-wrap{
+        position:relative;
+        border-radius:12px;
+        overflow:hidden;
+        background: var(--card, #9DBEBB); /* solid card color */
+        border:1px solid rgba(3,25,38,0.06);
+        box-shadow:0 12px 36px rgba(3,25,38,0.12);
+    }
+    .promo-slides{
+        display:flex;
+        transition:transform .5s ease;
+        will-change:transform;
+    }
+    .promo-slide{
+        min-width:100%;
+        height:180px;
+        background-size:cover;
+        background-position:center;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        color:var(--palette-1, #2A1A1A); /* dark text for captions */
+        font-weight:700;
+        font-size:20px;
+        padding:18px;
+        gap:12px;
+        position:relative;
+    }
+    .promo-overlay{
+        position:absolute;
+        inset:0;
+        background:rgba(3,25,38,0.06); 
+        pointer-events:none;
+    }
+    .promo-content{
+        position:relative;z-index:2;color:#fff;text-shadow:0 6px 18px rgba(0,0,0,0.5);
+        display:flex;flex-direction:column;gap:6px;
+        max-width:70%;
+    }
+    .promo-title{font-size:20px;font-weight:800}
+    .promo-sub{font-size:13px;color:rgba(255,255,255,0.9)}
+    .promo-cta{margin-top:8px;padding:8px 12px;border-radius:10px;background:var(--green);color:#ffffff;border:1px solid var(--green);cursor:pointer;width:max-content}
+
+    .promo-nav{
+        position:absolute;inset:auto 10px 12px 10px;display:flex;justify-content:space-between;gap:8px;z-index:3;
+    }
+    .promo-arrow{
+        background:rgba(0,0,0,0.35);border:0;color:#fff;padding:8px 10px;border-radius:8px;cursor:pointer;
+        backdrop-filter: blur(6px);
+    }
+    .promo-dots{
+        position:absolute;left:50%;transform:translateX(-50%);bottom:12px;display:flex;gap:8px;z-index:3;
+    }
+    .promo-dot{
+        width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,0.12);cursor:pointer;border:1px solid rgba(255,255,255,0.03)
+    }
+    .promo-dot.active{background:var(--accent);box-shadow:0 6px 18px rgba(194,149,71,0.06)}
+
+    @media (max-width:720px){
+        .promo-slide{height:140px}
+        .promo-content{max-width:85%}
+        .promo-title{font-size:16px}
+    }

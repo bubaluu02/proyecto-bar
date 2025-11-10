@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Barber shop</title>
+    <meta name="description" content="Descubre nuestro catálogo de máquinas de barbería de alta calidad a precios competitivos. Encuentra la herramienta perfecta para tu barbería con envío rápido y servicio local.">
+    <link rel="stylesheet" href="style 2.css" />
+
+    <!--estilos de google-->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root{
+            --palette-1: #000000d2; 
+            --palette-2: #000000; 
+            --palette-3: #306358d3; 
+            --palette-4: #ffffff; 
+            --palette-5: #ffffff; 
+            --green: #0f4e3c; 
+            --bg: var(--palette-2);
+            --card: var(--palette-3);
+            --accent: var(--palette-4); /* gold accent */
+            --muted: var(--palette-5);
+            --glass: rgba(42, 26, 26, 0.068);
+        }
+        *{box-sizing:border-box}
+        html,body{height:100%}
+        body{
+            margin:0;
+            font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;
+            background: var(--bg); /* sin degradado */
+            color:var(--palette-4); /* texto azul marino */
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
+        }
+
+        /* Header / Hero */
+        .hero{
+            padding:48px 20px;
+            display:flex;
+            gap:40px;
+            align-items:center;
+            justify-content:space-between;
+            max-width:1200px;
+            margin:0 auto;
+        }
+        .brand{
+            display:flex;
+            gap:18px;
+            align-items:center;
+        }
+        .logo{
+            width:72px;
+            height:72px;
+            border-radius:14px;
+            overflow:hidden;
+            display:block;
+            box-shadow:0 6px 18px rgba(0,0,0,0.12);
+            background:transparent;
+            padding:0;
+        }
+        .logo img{width:100%;height:100%;object-fit:cover;display:block}
+        .title{
+            line-height:1;
+        }
+        .title h1{
+            margin:0;
+            font-size:20px;
+            font-weight:700;
+        }
+        .title p{
+            margin:4px 0 0 0;
+            color:var(--muted);
+            font-size:13px;
+        }
+
+        /* CTA */
+        .cta{
+            display:flex;
+            gap:12px;
+            align-items:center;
+        }
+        .btn{
+            background:transparent;
+            color:var(--green);
+            border:1px solid var(--green);
+            padding:10px 16px;
+            border-radius:10px;
+            cursor:pointer;
+            font-weight:600;
+            transition:all .18s ease;
+            backdrop-filter: blur(6px);
+        }
+        .btn:focus{outline:2px solid rgba(5, 90, 66, 0.815)}
+        .btn.primary{
+            background: var(--green);
+            color: #ffffff;
+            border: 1px solid var(--green);
+            box-shadow: 0 6px 20px rgba(12, 100, 75, 0.295);
+        }
+
+        /* Main content */
+        main{max-width:1200px;margin:28px auto;padding:0 20px}
+        .intro{
+            display:flex;
+            gap:28px;
+            align-items:center;
+            background: var(--card); /* sólido sin degradado */
+            border-radius:12px;
+            padding:20px;
+            box-shadow: 0 6px 24px rgba(3,25,38,0.08);
+        }
+        .intro-left{
+            flex:1;
+        }
+        .intro h2{margin:0 0 8px 0;font-size:28px}
+        .intro p{margin:0;color:var(--muted)}
+        .intro-right{width:220px;text-align:right}
+        .badge{
+            display:inline-block;
+            padding:8px 12px;
+            border-radius:999px;
+            background:rgba(255,255,255,0.25);
+            color:var(--muted);
+            font-weight:600;
+            font-size:13px;
+        }
+
+        /* Catalog grid */
+        #catalogo{
+            margin-top:22px;
+            display:grid;
+            gap:18px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+        .card{
+            background: var(--card); /* sin degradado */
+            border-radius:12px;
+            padding:16px;
+            transition:transform .18s ease, box-shadow .18s ease;
+            border:1px solid rgba(43, 92, 58, 0.438);
+            cursor:pointer;
+        }
+        .card:hover{transform:translateY(-6px);
+            box-shadow:0 18px 40px rgba(62, 121, 72, 0.973)}
+        .card .img {
+            width: 100%;
+            aspect-ratio: 4/3; /* ajusta según la proporción que quieras */
+            border-radius:10px;
+            background-size:cover;
+            background-position:center;
+            margin-bottom:12px;
+            box-shadow: inset 0 -20px 60px rgba(43, 87, 49, 0.164);
+        }
+
+        .card h3{margin:0 0 6px 0;
+            font-size:16px}
+
+        .card p{margin:0;
+            color:var(--muted);
+            font-size:13px}
+
+        .price{
+            margin-top:12px;
+            font-weight:700;
+            color:var(--accent)
+        }
+        .actions{
+            margin-top:14px;
+            display:flex;
+            gap:8px;
+        }
+        .small{
+            padding:8px 10px;
+            border-radius:8px;
+            background:transparent;
+            border:1px solid rgba(3,25,38,0.06);
+            color:var(--muted);font-size:13px;
+            cursor:pointer;
+        }
+
+        /* Modal */
+        .modal-backdrop{
+            position:fixed;
+            inset:0;
+            background:rgba(3,25,38,0.4);
+            display:none;
+            align-items:center;
+            justify-content:center;
+            padding:20px;
+            z-index:60;
+        }
+        .modal{
+            width:100%;
+            max-width:980px;
+            background: var(--palette-1);
+            border-radius:12px;
+            padding:18px;
+            border:1px solid rgba(3,25,38,0.06);
+            box-shadow:0 40px 120px rgba(3,25,38,0.12);
+            color:var(--palette-5);
+        }
+        .modal-header{display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:12px}
+        .close{background:transparent;
+            border:0;
+            color:var(--muted);
+            cursor:pointer;
+            font-size:16px;
+            padding:8px}
+
+        /* Footer */
+        footer{max-width:1200px;
+            margin:32px auto 80px;
+            padding:0 20px;
+            color:var(--muted);
+            font-size:13px;
+            text-align:center}
+
+        /* Desktop -> Tablet -> Mobile breakpoints for consistent layout across devices */
+        @media (max-width:1024px){
+            .hero{
+                padding:36px 16px;
+                gap:28px;
+                align-items:center;
+            }
+            .intro{padding:16px}
+            #catalogo{gap:14px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));}
+            .card .img{height:160px}
+        }
+
+        @media (max-width:720px){
+            .hero{flex-direction:column;align-items:flex-start;padding:28px 16px;gap:18px}
+            .brand{width:100%;justify-content:flex-start}
+            .logo{width:60px;height:60px}
+            .title h1{font-size:18px}
+            .intro{flex-direction:column;padding:14px}
+            .intro-right{text-align:left;width:100%}
+            #catalogo{grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));gap:12px}
+            .card{padding:12px}
+            .card .img{height:140px}
+            .actions{justify-content:flex-start}
+        }
+
+        @media (max-width:480px){
+            .hero{padding:20px 12px}
+            .logo{width:50px;height:50px}
+            .title h1{font-size:16px}
+            .cta{flex-direction:column;gap:10px;width:100%}
+            .btn{width:100%;box-sizing:border-box}
+            .btn.primary{width:100%}
+            #catalogo{grid-template-columns: repeat(1, 1fr);gap:12px}
+            .card .img{height:120px}
+            .badge{font-size:12px;padding:6px 10px}
+            .intro h2{font-size:20px}
+        }
+    </style>
+</head>
+<!--CUERPO DE EL SITIO WEB-->
+<body>
+    <header class="hero" role="banner">
+        <div class="brand">
+            <!--LOGO-->
+            <div class="logo"><img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRAFv4qnkYxvSKLk9DeclxsjZpeyewpYx7zFQJMJ--XVBE_Ji3Q" alt="Barbercar logo"></div>
+            <div class="title">
+                <h1>BARBERCAR</h1>
+                <p> Clipper • Trimmer  • Rasuradoras • Porta navajas  </p>
+            </div>
+        </div>
+             <!--BOTONES PRINCIPALES-->
+        <div class="cta" role="navigation" aria-label="Acciones">
+            <button class="btn primary" onclick="openBooking()">Ayuda</button>
+            <button class="btn primary" id="btnCarrito">Carrito</button>
+            <button class="btn primary" id="btnCatalogo">Ver Catálogo</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="intro" aria-labelledby="intro-title">
+            <div class="intro-left">
+                <h2 id="intro-title">Catálogo </h2>
+                <p>Descubre nuestros productos premium seleccionados gracias a su gran calidad y rendimiento exclusivos para mantener tu estilo impecable.</p>
+                <div style="margin-top:12px;">
+                    <span class="badge">Calidad profesional</span>
+                    <span class="badge" style="margin-left:8px">Envío / Servicio local</span>
+                </div>
+            </div>
+            <div class="intro-right">
+                <div style="font-size:13px;color:var(--muted)">Clic Aqui</div>
+                <div style="margin-top:10px">
+                    <button class="btn primary" onclick="document.getElementById('catalogo').scrollIntoView({behavior:'smooth'})">Ver Mas</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="catalogo" aria-label="Catálogo">
+            <!-- carta 1 -->
+            <article class="card" tabindex="0" data-title="Combo clásico" data-desc="Maquina basica pero de buena calidad.">
+                <div class="img" style="background-image:url('https://scontent.fsap5-1.fna.fbcdn.net/v/t39.30808-6/485012815_586082864461950_6280884813466329932_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGkrSJK7oxyiBtabHp1KWi3Gkq1Jl-FXjMaSrUmX4VeMw4ArEHm0OoHBxYkRBIPKVTX0Ko88l4wzooC1zF289a9&_nc_ohc=c2ZYemSggccQ7kNvwGmuf2T&_nc_oc=Admeaaymsz8EgJaFiBGGqXUgJTi1gVWXdi5ZFOGR_p5YP0soc9Z3zkr2Xqt2rbbHUIkD2YS3n8rMWJLzGd4z2k1t&_nc_zt=23&_nc_ht=scontent.fsap5-1.fna&_nc_gid=PDY5Mko2L6e6SXstcJ3bwA&oh=00_AfhnszKZWsuMQvh-iigRCSE-z1vuo1VqB8Tp5ocMRBY6ng&oe=6915F9DF');"></div>
+                <h3>Paquete Basico</h3>
+                <p>Incluye cepillo y sus respectivos peines.</p>
+                <div class="price">2500 lPS</div>
+                <div class="actions">
+                    <button class="small" onclick="openDetails(event)">Detalles</button>
+                    <button class="small" onclick="addToCart(event)">Pedir</button>
+                </div>
+            </article>
+            <!-- carta 2 -->
+            <article class="card" tabindex="0" data-title="Combo premium" data-desc="Paquete de Maquinas de calidad.">
+                <div class="img" style="background-image:url('https://scontent.fsap5-1.fna.fbcdn.net/v/t39.30808-6/557587837_761000910303477_3477848837464207463_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeEL4iZUHpKoen6woQwxnLcOvHLRYBZf9zi8ctFgFl_3OJimKd01ASALzHMLIPkDBjTBO4Sd0PTjlJhHMYb6NZmF&_nc_ohc=UsjhZJ-LeE4Q7kNvwFsRpMf&_nc_oc=AdlgS1PA8CpPGD1GD8a04duRQe2mN3rWjNMFJh4kLO-AFdmDlRcoG9rMHbi-HUZDHFNHKjds4JK0J9xgAp6ICW8A&_nc_zt=23&_nc_ht=scontent.fsap5-1.fna&_nc_gid=i9cbaCRt26KRYbmrIL1Qew&oh=00_AfjWYj3Y3Yfzqk-HRqblOadhp6GUFlwuZCAjexmTIamXEQ&oe=6915FF05');"></div>
+                <h3>Combo premium</h3>
+                <p>Incluye portanavajas y sus respectivos accesorios.</p>
+                <div class="price">3000 lPS</div>
+                <div class="actions">
+                    <button class="small" onclick="openDetails(event)">Detalles</button>
+                    <button class="small" onclick="addToCart(event)">Pedir</button>
+                </div>
+            </article>
+
+            <!-- carta 3 -->
+            <article class="card" tabindex="0" data-title="Clipper" data-desc="Maquina Basica">
+                <div class="img" style="background-image:url('https://scontent.fsap5-1.fna.fbcdn.net/v/t39.30808-6/518388744_684121977991371_1732577233764748514_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeEfvB8o9QGH7ATFWAd1FrMZ3nu4ZRq5ZG7ee7hlGrlkbmSyuMfP5CkQSl3Gm-mjEoAmryhFSERPH2zfmyuguPX6&_nc_ohc=wx4YuP2U1loQ7kNvwGVkvZ0&_nc_oc=Adm8AIVycE1GjXCuLw8EfWaBoJVGbVh6qD4-nLsu1JS1FzMiK2lMQyMOFe_p5mYrh_S2lJNbATef1dbEiUACkx-Q&_nc_zt=23&_nc_ht=scontent.fsap5-1.fna&_nc_gid=17-SeJzNEqCGgueSXZTStA&oh=00_AfjGpB97PkrlahUmZ7z0zUH8yuW8dtaqXSE9A7QG9suEwQ&oe=6915F8B1');"></div>
+                <h3>Clipper</h3>
+                <p>De alta calidad con cuchillas de acero inoxidable y motor potente. Ideal para cortes precisos, duradera y cómoda en la mano.</p>
+                <div class="price">1500 lPS</div>
+                <div class="actions">
+                    <button class="small" onclick="openDetails(event)">Detalles</button>
+                    <button class="small" onclick="addToCart(event)">Pedir</button>
+                </div>
+            </article>
+
+            <!-- carta 4 -->
+            <article class="card" tabindex="0" data-title="TRIMMER" data-desc=" Maquina 2">
+                <div class="img" style="background-image:url('https://scontent.fsap5-1.fna.fbcdn.net/v/t39.30808-6/482130436_577515828651987_1226808333431585435_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=107&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHy4B9is6kmvcrK8GYOiPUP9_XxAUXRNKH39fEBRdE0oWp1nSEw3MZagTkwhKIG0drOGstKagNH0mmcYVt33iKb&_nc_ohc=5k4i3hNrz5EQ7kNvwE8fBQP&_nc_oc=Admj_ZiIVG5wr0sbBL6oGhaNpTmQiVcw_ABPvd2uxfQGmPlvyPj3PYjl0vH9l1NRVzEnlbeBiCtl07P7mg05rpPR&_nc_zt=23&_nc_ht=scontent.fsap5-1.fna&_nc_gid=O6QxTctNbPKqP3nccQ6vZQ&oh=00_AfgVgw5eufHeV6mxo8VyNDXxFNnFFjCY2ZG7SuEnND99VQ&oe=6915EC5A');"></div>
+                <h3>Trimmer</h3>
+                <p>La trimmer que todo barbero quiere. Perfilados nítidos, precisión absoluta y diseño ergonómico.</p>
+                <div class="price">1200 Lps</div>
+                <div class="actions">
+                    <button class="small" onclick="openDetails(event)">Detalles</button>
+                    <button class="small" onclick="addToCart(event)">pedir</button>
+                </div>
+            </article>
+        </section>
+
+        <!-- Modal (Catálogo completo / detalles) -->
+        <div id="modalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
+            <div class="modal" role="document">
+                <div class="modal-header">
+                    <strong id="modalTitle">Catálogo</strong>
+                    <div>
+                        <button class="close" aria-label="Cerrar" onclick="closeModal()">✕</button>
+                    </div>
+                </div>
+                <div id="modalContent" style="max-height:60vh;overflow:auto;">
+                    <!-- Contenido dinámico -->
+                    <p style="color:var(--muted)">Carga del catálogo completo...</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        © <span id="year"></span> Barber shop — Diseño y productos seleccionados. Llámanos para reservar horarios.
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

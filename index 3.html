@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Mis Pedidos - Carrito</title>
+    <style>
+        :root {
+  --palette-1: #000000d2;
+  --palette-2: #000000;
+  --palette-3: #306358d3;
+  --palette-4: #ffffff;
+  --palette-5: #d1d5db;
+  --green: #0f4e3c;
+  --bg: var(--palette-2);
+  --card: var(--palette-3);
+  --accent: var(--palette-4);
+  --muted: var(--palette-5);
+  --danger: #ef4444;
+  --success: #10b981;
+  --glass: rgba(42, 26, 26, 0.068);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, Segoe UI, Roboto, "Helvetica Neue", Arial;
+  background: var(--bg);
+  color: var(--palette-4);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 32px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* HEADER */
+header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 22px;
+  letter-spacing: -0.2px;
+}
+
+header p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.btn {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--green);
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.18s ease;
+  backdrop-filter: blur(6px);
+}
+
+.btn.primary {
+  background: var(--green);
+  color: #fff;
+  border: 1px solid var(--green);
+  box-shadow: 0 6px 20px rgba(12, 100, 75, 0.295);
+}
+
+.btn.ghost {
+  border: 1px dashed rgba(255, 255, 255, 0.25);
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card);
+  padding: 6px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.search input {
+  border: 0;
+  outline: 0;
+  font-size: 14px;
+  background: transparent;
+  width: 220px;
+  color: var(--accent);
+}
+
+/* ORDENES */
+.orders {
+  display: grid;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.order {
+  background: linear-gradient(180deg, var(--card), var(--glass));
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 6px 18px rgba(16, 24, 40, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.order-meta {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.badge {
+  font-size: 13px;
+  padding: 6px 8px;
+  border-radius: 999px;
+  color: white;
+}
+
+.status-pendiente {
+  background: #f97316;
+}
+
+.status-enruta {
+  background: #f59e0b;
+}
+
+.status-entregado {
+  background: var(--success);
+}
+
+.status-cancelado {
+  background: var(--danger);
+}
+
+.order-info {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.order-items {
+  margin-top: 12px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.08);
+  padding-top: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.item {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.thumb {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #eef2ff, #e0f2fe);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.item-detail {
+  flex: 1;
+}
+
+.item-title {
+  font-weight: 600;
+}
+
+.item-meta {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.price {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.order-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* FOOTER */
+footer {
+  max-width: 1200px;
+  margin: 32px auto 80px;
+  padding: 0 20px;
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+}
+
+/* RESPONSIVE */
+@media (max-width: 720px) {
+  .search input {
+    width: 120px;
+  }
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .order-items {
+    padding-top: 10px;
+  }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>Mis Pedidos</h1>
+                <p>Ve aquí todos los pedidos que has realizado — estilo carrito / historial</p>
+            </div>
+
+            <div class="controls">
+                <div class="search">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="opacity:.6"><path d="M21 21l-4.35-4.35" stroke="#111827" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="6" stroke="#111827" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <input id="q" placeholder="Buscar pedido o producto..." />
+                </div>
+                <button class="btn" id="sampleBtn" title="Cargar ejemplo">Cargar ejemplo</button>
+                <button class="btn" id="clearBtn" title="Eliminar todos">Borrar todo</button>
+            </div>
+        </header>
+
+        <main>
+            <section id="orders" class="orders" aria-live="polite"></section>
+            <div id="empty" class="muted" style="margin-top:20px;display:none">No hay pedidos guardados. Presiona "Cargar ejemplo" para ver cómo luce.</div>
+        </main>
+    </div>
+
+    <script src="script2.js"></script>
+</body>
+</html>
